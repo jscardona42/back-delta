@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categorias {
+  id_categoria            Int                       @id @default(autoincrement())
+  nombre                  String                    @db.VarChar(255)
+  estado                  Boolean                   @default(true)
+  categoriassubcategorias categoriassubcategorias[]
+}
+
+model categoriassubcategorias {
+  id_categoria_subcategoria Int           @id @default(autoincrement())
+  id_categoria              Int
+  id_subcategoria           Int
+  categorias                categorias    @relation(fields: [id_categoria], references: [id_categoria], onDelete: Cascade, map: "fk_id_categoria")
+  subcategorias             subcategorias @relation(fields: [id_subcategoria], references: [id_subcategoria], onDelete: Cascade, map: "fk_id_subcategoria")
+
+  @@index([id_categoria], map: "fk_id_categoria")
+  @@index([id_subcategoria], map: "fk_id_subcategoria")
+}
+
+model productos {
+  id_producto            Int                      @id @default(autoincrement())
+  nombre                 String?                  @db.VarChar(255)
+  productoscostos        productoscostos[]
+  productossubcategorias productossubcategorias[]
+}
+
+model productoscostos {
+  producto_precio_id Int       @id @default(autoincrement())
+  costo              Float     @db.Float
+  cantidad           Int
+  ipc                Float     @db.Float
+  bonificacion       Float     @db.Float
+  descuento          Float     @db.Float
+  fecha              DateTime  @default(now()) @db.Timestamp(6)
+  id_producto        Int
+  codigo             String    @db.VarChar(255)
+  productos          productos @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, map: "fk_id_producto")
+
+  @@index([id_producto], map: "fk_id_producto")
+}
+
+model productossubcategorias {
+  id_producto_subcategoria Int           @id @default(autoincrement())
+  id_producto              Int
+  id_subcategoria          Int
+  productos                productos     @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, map: "fk_fk_productossubcantegorias_id_producto")
+  subcategorias            subcategorias @relation(fields: [id_subcategoria], references: [id_subcategoria], onDelete: Cascade, map: "fk_productossubcantegorias_id_subcategoria")
+
+  @@index([id_producto], map: "fk_fk_productossubcantegorias_id_producto")
+  @@index([id_subcategoria], map: "fk_productossubcantegorias_id_subcategoria")
+}
+
+model subcategorias {
+  id_subcategoria         Int                       @id @default(autoincrement())
+  nombre                  String                    @db.VarChar(255)
+  estado                  Int                       @default(1) @db.TinyInt
+  categoriassubcategorias categoriassubcategorias[]
+  productossubcategorias  productossubcategorias[]
+}
