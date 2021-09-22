@@ -36,6 +36,7 @@ model productoscostos {
   producto_precio_id Int       @id @default(autoincrement())
   costo              Float     @db.Float
   cantidad           Int
+  iva                Float     @db.Float 
   ipc                Float     @db.Float
   bonificacion       Float     @db.Float
   descuento          Float     @db.Float
