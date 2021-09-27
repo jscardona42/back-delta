@@ -36,7 +36,7 @@ model productoscostos {
   producto_precio_id Int       @id @default(autoincrement())
   costo              Float     @db.Float
   cantidad           Int
-  iva                Float     @db.Float 
+  iva                Float     @db.Float
   ipc                Float     @db.Float
   bonificacion       Float     @db.Float
   descuento          Float     @db.Float
@@ -65,4 +65,11 @@ model subcategorias {
   estado                  Int                       @default(1) @db.TinyInt
   categoriassubcategorias categoriassubcategorias[]
   productossubcategorias  productossubcategorias[]
+}
+
+model usuarios {
+  id_usuario Int    @id @default(autoincrement())
+  nombre     String @db.VarChar(150)
+  correo     String @db.VarChar(100)
+  clave      String @db.VarChar(100)
 }
