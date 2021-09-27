@@ -12,6 +12,13 @@ export class SubCategoriasController {
     @Get('get')
     async getCategorias() {
         return this.subcategoriasService.getSubCategorias();
+
+    }
+
+    @Get('byid/:id')
+    async getSubCategoriasById(@Param('id') id: string) {
+        return this.subcategoriasService.getSubCategoriasById(Number(id));
+        
     }
 
     @Post('create')
@@ -32,3 +39,4 @@ export class SubCategoriasController {
     }
 
 }
+

@@ -23,6 +23,9 @@ let SubCategoriasController = class SubCategoriasController {
     async getCategorias() {
         return this.subcategoriasService.getSubCategorias();
     }
+    async getSubCategoriasById(id) {
+        return this.subcategoriasService.getSubCategoriasById(Number(id));
+    }
     async createSubCategoria(data) {
         return this.subcategoriasService.createSubCategoria(data);
     }
@@ -39,6 +42,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], SubCategoriasController.prototype, "getCategorias", null);
+__decorate([
+    (0, common_1.Get)('byid/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SubCategoriasController.prototype, "getSubCategoriasById", null);
 __decorate([
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),

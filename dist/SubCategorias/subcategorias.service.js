@@ -19,6 +19,11 @@ let SubCategoriasService = class SubCategoriasService {
     async getSubCategorias() {
         return await this.prismaService.subcategorias.findMany();
     }
+    async getSubCategoriasById(id_subcategoria) {
+        return await this.prismaService.subcategorias.findUnique({
+            where: { id_subcategoria: id_subcategoria }
+        });
+    }
     async createSubCategoria(data) {
         return await this.prismaService.subcategorias.create({
             data: Object.assign({}, data)

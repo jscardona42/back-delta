@@ -12,6 +12,12 @@ export class SubCategoriasService {
         return await this.prismaService.subcategorias.findMany();
     }
 
+    async getSubCategoriasById(id_subcategoria: number): Promise<SubCategorias> {
+        return await this.prismaService.subcategorias.findUnique({
+            where: { id_subcategoria: id_subcategoria }
+        })
+    }
+
     async createSubCategoria(data: CreateSubCategoriaInput) {
         return await this.prismaService.subcategorias.create({
             data: {
