@@ -8,3 +8,8 @@ export class CreateUsuariosInput {
 export class UpdateUsuariosInput extends CreateUsuariosInput {
     id_usuario: number
 }
+
+export class SignInUsuariosInput {
+    correo: string
+    clave: string
+}
