@@ -15,15 +15,13 @@ const productos_controller_1 = require("./Productos/productos.controller");
 const productos_service_1 = require("./Productos/productos.service");
 const subcategorias_controller_1 = require("./SubCategorias/subcategorias.controller");
 const subcategorias_service_1 = require("./SubCategorias/subcategorias.service");
-const usuarios_controller_1 = require("./Usuarios/usuarios.controller");
-const usuarios_service_1 = require("./Usuarios/usuarios.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [categorias_controller_1.CategoriasController, productos_controller_1.ProductosController, subcategorias_controller_1.SubCategoriasController, usuarios_controller_1.UsuariosController],
-        providers: [categorias_service_1.CategoriasService, prisma_service_1.PrismaService, productos_service_1.ProductosService, subcategorias_service_1.SubCategoriasService, usuarios_service_1.UsuariosService],
+        controllers: [categorias_controller_1.CategoriasController, productos_controller_1.ProductosController, subcategorias_controller_1.SubCategoriasController],
+        providers: [categorias_service_1.CategoriasService, prisma_service_1.PrismaService, productos_service_1.ProductosService, subcategorias_service_1.SubCategoriasService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
