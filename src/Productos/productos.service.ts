@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { isDataView } from 'util/types';
 import { PrismaService } from '../prisma.service';
 var XLSX = require('xlsx');
 
@@ -7,23 +6,16 @@ var XLSX = require('xlsx');
 export class ProductosService {
     constructor(private prismaService: PrismaService) { }
 
-
-    readExcel() {
-        let ruta = 'C:/Users/Soacha_Delta/Documents/GitHub/delta/src/files/productosbd.xlsx';
-        const workBook = XLSX.readFile(ruta);
-        const workBookSheets = workBook.SheetNames;
-        const sheet = workBookSheets[0];
-        const dataExcel = XLSX.utils.sheet_to_json(workBook.Sheets[sheet]);
-
-        return dataExcel;
+    async getProductos() {
+        return this.prismaService.productos.findMany({
+            include: { productoscostos: true }
+        });
     }
 
-    async saveProductosAndCostos() {
+    async saveProductosAndCostos(dataExcel: any) {
         let producto = null;
-        let dataExcel = this.readExcel();
 
         dataExcel.forEach(async element => {
-
             producto = await this.prismaService.productos.findFirst({
                 where: { nombre: element.nombre }
             })

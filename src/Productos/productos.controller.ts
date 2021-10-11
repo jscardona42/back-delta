@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
+import { CreateProductoInput } from "./dto/productos.dto";
 import { ProductosService } from "./productos.service";
 
 
@@ -8,9 +9,9 @@ export class ProductosController {
         private readonly productosService: ProductosService,
     ) { }
 
-    @Get('save')
-    async saveProductosAndCostos() {
-        return this.productosService.saveProductosAndCostos();
+    @Post('create')
+    async saveProductosAndCostos(@Body() data: [CreateProductoInput]) {
+        return this.productosService.saveProductosAndCostos(data);
     }
 
 
