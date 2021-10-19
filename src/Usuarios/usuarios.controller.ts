@@ -40,7 +40,7 @@ export class UsuariosController {
     return this.usuariosService.deleteUsuarios(Number(id));
   }
 
-  @Get('iniciarsesion')
+  @Post('iniciarsesion')
   async signInUsuarios(@Body() data: SignInUsuariosInput): Promise<Usuarios> {
     return this.usuariosService.signInUsuarios(data);
   }
