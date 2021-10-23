@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 import { CategoriasController } from './Categorias/categorias.controller';
 import { CategoriasService } from './Categorias/categorias.service';
 import { PrismaService } from './prisma.service';
@@ -10,7 +12,13 @@ import { UsuariosController } from './Usuarios/usuarios.controller';
 import { UsuariosService } from './Usuarios/usuarios.service';
 
 @Module({
-  imports: [],
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: "secret",
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
   controllers: [CategoriasController, ProductosController, SubCategoriasController, UsuariosController],
   providers: [CategoriasService, PrismaService, ProductosService, SubCategoriasService, UsuariosService],
 })
