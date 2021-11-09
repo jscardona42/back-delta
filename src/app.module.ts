@@ -16,7 +16,7 @@ import { UsuariosService } from './Usuarios/usuarios.service';
     PassportModule,
     JwtModule.register({
       secret: "secret",
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [CategoriasController, ProductosController, SubCategoriasController, UsuariosController],

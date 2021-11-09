@@ -10,7 +10,7 @@ import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsuariosService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService) { }
 
   async getUsuarios(): Promise<Usuarios[]> {
     return await this.prismaService.usuarios.findMany();
@@ -51,10 +51,15 @@ export class UsuariosService {
   }
 
   async signInUsuarios(data: SignInUsuariosInput): Promise<Usuarios> {
+
     const salt = await this.prismaService.usuarios.findFirst({
       where: { correo: data.correo },
       select: { salt: true },
     });
+
+    console.log(data);
+
+    console.log(salt);
 
     // Obtenemos la llave de la base de datos
     if (salt === null) {
@@ -63,12 +68,12 @@ export class UsuariosService {
 
     // Almacenamos el usuario devuelto en una variable
     const usuario = await this.prismaService.usuarios.findFirst({
-      where: {
-        correo: data.correo,
-        clave: await bcrypt.hash(data.clave, salt.salt),
-      },
+      where: { AND: [{ correo: data.correo, clave: await bcrypt.hash(data.clave, salt.salt) }] },
     });
 
+    // console.log(await bcrypt.hash(data.clave, salt.salt));
+
+    // console.log(usuario);
     // Mostramos mensaje de error
     if (usuario === null) {
       throw new UnauthorizedException('Datos de acceso incorrectos');
