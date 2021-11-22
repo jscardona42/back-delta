@@ -13,7 +13,7 @@ import { Usuarios } from './entities/usuarios.entity';
 
 @Controller('usuarios')
 export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) {}
+  constructor(private readonly usuariosService: UsuariosService) { }
 
   @Get('get')
   async getUsuarios() {
@@ -41,7 +41,7 @@ export class UsuariosController {
   }
 
   @Post('iniciarsesion')
-  async signInUsuarios(@Body() data: SignInUsuariosInput): Promise<Usuarios> {
+  async signInUsuarios(@Body() data: SignInUsuariosInput): Promise<Object> {
     return this.usuariosService.signInUsuarios(data);
   }
 }

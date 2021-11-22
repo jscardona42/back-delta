@@ -68,9 +68,10 @@ model subcategorias {
 }
 
 model usuarios {
-  id_usuario Int    @id @default(autoincrement())
-  nombre     String @db.VarChar(150)
-  correo     String @db.VarChar(250)
-  clave      String @db.VarChar(250)
+  id_usuario Int     @id @default(autoincrement())
+  nombre     String  @db.VarChar(150)
+  correo     String  @db.VarChar(250)
+  clave      String  @db.VarChar(250)
   salt       String? @db.VarChar(250)
+  token      String? 
 }
