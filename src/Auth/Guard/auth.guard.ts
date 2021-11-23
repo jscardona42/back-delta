@@ -11,7 +11,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     const request = context.switchToHttp().getRequest();
 
-    if (query === "signInUsuarios") {
+    if (query === "signInUsuarios" || query === "createUsuarios") {
       return true;
     }
 
