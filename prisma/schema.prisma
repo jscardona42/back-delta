@@ -62,7 +62,7 @@ model productossubcategorias {
 model subcategorias {
   id_subcategoria         Int                       @id @default(autoincrement())
   nombre                  String                    @db.VarChar(255)
-  estado                  Int                       @default(1) @db.TinyInt
+  estado                  Int?                       @default(1) @db.TinyInt
   categoriassubcategorias categoriassubcategorias[]
   productossubcategorias  productossubcategorias[]
 }
